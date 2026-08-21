@@ -1,3 +1,4 @@
+<!-- provenance: transcript | edited-by: cmd agent | edit: fixed official name 'European Accessibility Act' | date: 2026-08-21 -->
 
 # Intro to accessibility
 

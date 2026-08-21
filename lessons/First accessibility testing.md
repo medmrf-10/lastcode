@@ -1,3 +1,5 @@
+<!-- provenance: ai-completed | source: course curriculum outline (roadmaps/L-2-frontend-1-jobran-1.md chapter 3 item) | completed-by: cmd agent | date: 2026-08-21 -->
+
 # First accessibility testing
 
 Last updated August 2026
