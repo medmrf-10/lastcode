@@ -187,3 +187,20 @@ const html = `<!DOCTYPE html>
 
 fs.writeFileSync(outPath, html);
 console.log(`dashboard generated -> ${path.relative(root, outPath)} (${allAtoms.length} atoms from ${proposals.length} proposals)`);
+
+/* 6) تحديث رقمي /me في platform/me.html: ذرات قاعدة المعرفة + خدمات VPS العاملة */
+const mePath = path.join(root, 'platform', 'me.html');
+if (fs.existsSync(mePath)) {
+  let me = fs.readFileSync(mePath, 'utf8');
+  me = me.replace(/(id="code-atoms">)[^<]*/, `$1${kbCount ?? 0}`);
+  try {
+    const jlist = JSON.parse(execSync(
+      'ssh -o BatchMode=yes -o ConnectTimeout=5 root@169.58.89.74 "pm2 jlist"',
+      { timeout: 15000 },
+    ).toString());
+    const online = jlist.filter((p) => p.pm2_env?.status === 'online').length;
+    if (online > 0) me = me.replace(/(id="vps-services">)[^<]*/, `$1${online}`);
+  } catch { /* السيرفر غير متاح — يبقى الرقم السابق */ }
+  fs.writeFileSync(mePath, me);
+  console.log('me.html numbers updated');
+}
