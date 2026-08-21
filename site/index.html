@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code — نظام الإتقان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    background: #0b0e14;
+    color: #e8eaed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  main { flex: 1; width: min(760px, 100%); margin: 0 auto; padding: 72px 24px 64px; }
+  .badge {
+    display: inline-block;
+    font-size: 12.5px;
+    color: #9ece6a;
+    background: rgba(158,206,106,.08);
+    border: 1px solid rgba(158,206,106,.25);
+    border-radius: 999px;
+    padding: 4px 14px;
+  }
+  h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; margin-top: 18px; letter-spacing: -0.02em; line-height: 1.25; }
+  h1 span { color: #7aa2f7; }
+  .lead { color: #b6bcc4; margin-top: 14px; font-size: 16.5px; line-height: 2; }
+  .steps { margin-top: 40px; display: grid; gap: 12px; }
+  .step {
+    background: #131720;
+    border: 1px solid #1f2633;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step .n {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(122,162,247,.12);
+    color: #7aa2f7;
+    font-weight: 700;
+    font-size: 14px;
+    display: grid;
+    place-items: center;
+    margin-top: 2px;
+  }
+  .step h3 { font-size: 15.5px; font-weight: 600; }
+  .step p { color: #9aa0a6; font-size: 13.5px; margin-top: 4px; line-height: 1.8; }
+  code {
+    direction: ltr; display: inline-block;
+    background: #0d1117; border: 1px solid #1f2633;
+    border-radius: 6px; padding: 2px 8px;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12.5px; color: #7aa2f7;
+  }
+  footer { text-align: center; color: #5f6368; font-size: 13px; padding: 20px; border-top: 1px solid #1f2633; }
+  footer a { color: #7aa2f7; text-decoration: none; }
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">نسخة مبكرة — قيد البناء المستمر</span>
+  <h1>حوّل دروسك إلى <span>ذرات معرفة</span><br>وتقنها بالمراجعة المتباعدة</h1>
+  <p class="lead">
+    نظام إتقان شخصي: يأخذ دروسك من مصادرها الأصلية، يفككها إلى ذرات معرفية موثقة بالمصدر،
+    تراجعها بنفسك، ثم يراجعها معك بجدولة FSRS — وكل بطاقة تستحق مراجعتها يولّد لك تمرينًا جديدًا مخصصًا لها.
+  </p>
+  <div class="steps">
+    <div class="step"><div class="n">١</div><div><h3>استخراج موثّق</h3><p>كل ذرة مقتبسة حرفيًا من الدرس، ببلوك مصدر دقيق، وبعقد تحقق صارم يمنع الهلوسة.</p></div></div>
+    <div class="step"><div class="n">٢</div><div><h3>بوابة بشرية</h3><p>لا شيء يدخل قاعدة معرفتك إلا بقرارك أنت: اعتمد، أو «أعرفها» بفاصل طويل، أو استبعد.</p></div></div>
+    <div class="step"><div class="n">٣</div><div><h3>مراجعة تتكيف معك</h3><p>FSRS يحدد متى تراجع كل ذرة، والتاريخ التعلمي لكل بطاقة يشكّل تمارينها القادمة.</p></div></div>
+  </div>
+</main>
+<footer><a href="/">← عودة إلى المنصة</a></footer>
+</body>
+</html>

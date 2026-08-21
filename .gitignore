@@ -1,0 +1,18 @@
+.DS_Store
+node_modules/
+dist/
+coverage/
+.env
+app/.env
+.learn/
+.commandcode/
+
+# دفاتر العمل الخاصة — محلية فقط، لا تُنشر أبدًا
+notes/keys.md
+notes/cmd.md
+notes/cmd2.md
+notes/sol.md
+notes/GLM.md
+notes/ox.md
+notes/todo.md
+.obsidian/

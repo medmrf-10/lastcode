@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>البومرف — منصة أعمالي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
+    background: #0b0e14;
+    color: #e8eaed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header { padding: 64px 24px 24px; text-align: center; }
+  header h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; }
+  header h1 span { color: #7aa2f7; }
+  header p { color: #9aa0a6; margin-top: 10px; font-size: 15px; }
+  main {
+    flex: 1;
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  a.card {
+    display: block;
+    background: #131720;
+    border: 1px solid #1f2633;
+    border-radius: 14px;
+    padding: 22px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  a.card:hover { transform: translateY(-3px); border-color: #7aa2f7; background: #161d29; }
+  a.card:active { transform: translateY(-1px); }
+  .card .icon { font-size: 30px; line-height: 1; }
+  .card h2 { font-size: 18px; margin-top: 12px; font-weight: 600; }
+  .card p { color: #9aa0a6; font-size: 13.5px; margin-top: 6px; line-height: 1.7; }
+  .card .path {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 12px;
+    color: #7aa2f7;
+    background: rgba(122,162,247,.08);
+    border: 1px solid rgba(122,162,247,.18);
+    border-radius: 999px;
+    padding: 3px 12px;
+    direction: ltr;
+  }
+  footer { text-align: center; color: #5f6368; font-size: 13px; padding: 20px; border-top: 1px solid #1f2633; }
+</style>
+</head>
+<body>
+<header>
+  <h1>الـ<span>بومرف</span></h1>
+  <p>منصة واحدة لكل تطبيقاتي ومنتجاتي — كل شيء في مكانه</p>
+</header>
+<main>
+  <div class="grid">
+    <a class="card" href="/stm/">
+      <div class="icon">📖</div>
+      <h2>STM — اقرأ ودرس</h2>
+      <p>قارئ ذكي + تكرار متباعد FSRS: حول أي مقالة إلى بطاقات دراسة وراجعها بجدولة علمية.</p>
+      <span class="path">/stm</span>
+    </a>
+    <a class="card" href="/code/">
+      <div class="icon">🧠</div>
+      <h2>Code — نظام الإتقان</h2>
+      <p>من الدروس إلى الذرات المعرفية: استخراج موثّق، مراجعة بشرية، ومراجعات متباعدة بتدريب متكيف.</p>
+      <span class="path">/code</span>
+    </a>
+  </div>
+</main>
+<footer>صُنع بعناية — جميع التطبيقات تعمل على هذا السيرفر</footer>
+</body>
+</html>
