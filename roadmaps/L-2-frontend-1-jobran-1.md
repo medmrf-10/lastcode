@@ -17,7 +17,7 @@
 3. Intro to accessibility
 	1. [[Intro to accessibility]]
 	2. [[Headings & Accessibility]]
-	3. First accessibility testing
+	3. [[First accessibility testing]]
 	4. [[Using screen readers]]
 	5. [[Chapter 3 recap]]
 4. Headings deep dive

@@ -60,7 +60,7 @@ Here are some benefits of accessibility:
 - It increases the conversion rate for your product as you allow more people to use it.
 - You get to decide whether you give people access or deny them access to your product. By making it accessible, you are allowing them to access it.
 - In some countries or organizations, accessibility is a legal requirement. That is the case in [several countries](https://www.w3.org/WAI/policies/).
-- The EU has adopted the [European accessibility act](https://ec.europa.eu/social/main.jsp?catId=1202) in 2025.
+- The EU has adopted the [European Accessibility Act](https://ec.europa.eu/social/main.jsp?catId=1202) in 2025.
 
 In this course, you will learn about accessibility step by step as we learn new concepts in HTML/CSS. This will make the concept of accessibility _accessible_ ;).
 
