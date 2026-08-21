@@ -3,85 +3,431 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="البومرف — منصة أعمالي: STM للقراءة الذكية والتكرار المتباعد FSRS، و Code لنظام الإتقان مع لوحة حية.">
 <title>البومرف — منصة أعمالي</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: "IBM Plex Sans Arabic", system-ui, sans-serif;
-    background: #0b0e14;
-    color: #e8eaed;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  :root{
+    --bg:#000000;
+    --text:#e7e9ea;
+    --muted:#71767b;
+    --accent:#1d9bf0;
+    --border:#2f3336;
+    --hover:rgba(239,243,244,.03);
+    --green:#00ba7c;
+    --radius:16px; /* rounded-2xl */
   }
-  header { padding: 64px 24px 24px; text-align: center; }
-  header h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; }
-  header h1 span { color: #7aa2f7; }
-  header p { color: #9aa0a6; margin-top: 10px; font-size: 15px; }
-  main {
-    flex: 1;
-    width: min(1080px, 100%);
-    margin: 0 auto;
-    padding: 32px 24px 64px;
+
+  *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    min-height:100vh;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
+
+  ::selection{ background:rgba(29,155,240,.35); }
+
+  a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+    border-radius:10px;
   }
-  a.card {
-    display: block;
-    background: #131720;
-    border: 1px solid #1f2633;
-    border-radius: 14px;
-    padding: 22px;
-    text-decoration: none;
-    color: inherit;
-    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+
+  /* ===== Layout: X-style centered column ===== */
+  .column{
+    width:100%;
+    max-width:600px;
+    margin-inline:auto;
+    min-height:100vh;
+    min-height:100dvh;
+    display:flex;
+    flex-direction:column;
   }
-  a.card:hover { transform: translateY(-3px); border-color: #7aa2f7; background: #161d29; }
-  a.card:active { transform: translateY(-1px); }
-  .card .icon { font-size: 30px; line-height: 1; }
-  .card h2 { font-size: 18px; margin-top: 12px; font-weight: 600; }
-  .card p { color: #9aa0a6; font-size: 13.5px; margin-top: 6px; line-height: 1.7; }
-  .card .path {
-    display: inline-block;
-    margin-top: 14px;
-    font-size: 12px;
-    color: #7aa2f7;
-    background: rgba(122,162,247,.08);
-    border: 1px solid rgba(122,162,247,.18);
-    border-radius: 999px;
-    padding: 3px 12px;
-    direction: ltr;
+  @media (min-width:640px){
+    .column{ border-inline:1px solid var(--border); }
   }
-  footer { text-align: center; color: #5f6368; font-size: 13px; padding: 20px; border-top: 1px solid #1f2633; }
+
+  /* ===== Top bar ===== */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(0,0,0,.72);
+    -webkit-backdrop-filter:blur(12px);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .topbar-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 16px;
+  }
+  .logo-mark{
+    display:grid;
+    place-items:center;
+    width:38px;
+    height:38px;
+    flex:none;
+    border-radius:12px;
+    border:1px solid var(--border);
+    color:var(--accent);
+    transition:border-color .2s ease;
+  }
+  .logo-mark:hover{ border-color:var(--accent); }
+  .logo-mark svg{ width:20px; height:20px; display:block; }
+  .brand{ display:flex; flex-direction:column; min-width:0; line-height:1.3; }
+  .brand strong{ font-size:19px; font-weight:800; letter-spacing:-.01em; }
+  .brand span{ font-size:13px; color:var(--muted); }
+
+  /* ===== Tabs (decorative strip like X profile tabs) ===== */
+  .tabs{ display:flex; }
+  .tab{
+    position:relative;
+    flex:1;
+    text-align:center;
+    padding:14px 8px;
+    font-size:15px;
+    font-weight:600;
+    color:var(--muted);
+    text-decoration:none;
+    transition:background-color .2s ease,color .2s ease;
+  }
+  .tab:hover{ color:var(--text); background-color:var(--hover); }
+  .tab.active{ color:var(--text); font-weight:700; }
+  .tab.active::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    right:50%;
+    transform:translateX(50%);
+    width:56px;
+    height:4px;
+    border-radius:999px;
+    background:var(--accent);
+  }
+
+  /* ===== Profile block ===== */
+  .profile{
+    padding:20px 16px;
+    border-bottom:1px solid var(--border);
+  }
+  .avatar{
+    width:76px;
+    height:76px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    font-size:32px;
+    font-weight:800;
+    color:#ffffff;
+    background:linear-gradient(135deg,#1d9bf0,#8ecdf8);
+    border:4px solid var(--bg);
+    box-shadow:0 0 0 1px var(--border);
+    user-select:none;
+  }
+  .name-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-top:12px;
+  }
+  .name-row h1{ font-size:22px; font-weight:800; letter-spacing:-.01em; }
+  .verified{ width:20px; height:20px; flex:none; display:inline-block; }
+  .handle{ display:block; margin-top:2px; font-size:15px; color:var(--muted); direction:ltr; text-align:right; }
+  .bio{ margin-top:12px; font-size:15px; line-height:1.75; color:var(--text); }
+  .stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-top:12px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .stats strong{ color:var(--text); font-weight:700; }
+
+  /* ===== Apps section ===== */
+  .section-head{
+    padding:16px 16px 4px;
+    scroll-margin-top:128px;
+  }
+  .section-head h2{ font-size:20px; font-weight:800; letter-spacing:-.01em; }
+  .section-head p{ margin-top:2px; font-size:13.5px; color:var(--muted); }
+
+  .cards{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    padding:12px 16px 20px;
+  }
+
+  /* Card = X-post style: thin border, big radius, faint overlay on hover */
+  .card{
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    background-color:transparent;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:16px;
+    transition:background-color .2s ease,border-color .2s ease,transform .15s ease;
+  }
+  .card:hover{
+    background-color:var(--hover);
+    border-color:#3e4144;
+  }
+  .card:active{ transform:scale(.995); }
+
+  .card-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .app-icon{
+    width:44px;
+    height:44px;
+    flex:none;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    border:1px solid var(--border);
+  }
+  .app-icon svg{ width:22px; height:22px; display:block; }
+  .app-icon.stm{ color:var(--accent); background:rgba(29,155,240,.1); }
+  .app-icon.code{ color:var(--green); background:rgba(0,186,124,.1); }
+
+  .card-id{ flex:1; min-width:0; }
+  .card-id strong{ font-size:17px; font-weight:700; }
+  .card-id .sub{
+    display:block;
+    margin-top:2px;
+    font-size:13px;
+    color:var(--muted);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .badge{
+    flex:none;
+    direction:ltr;
+    font-size:12px;
+    font-weight:600;
+    color:var(--muted);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:4px 10px;
+    transition:color .2s ease,border-color .2s ease;
+  }
+  .card:hover .badge{ color:var(--accent); border-color:rgba(29,155,240,.4); }
+
+  .desc{
+    margin-top:12px;
+    font-size:15px;
+    line-height:1.75;
+    color:var(--text);
+  }
+
+  .live{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:12px;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--green);
+  }
+  .live .dot{
+    width:8px;
+    height:8px;
+    flex:none;
+    border-radius:50%;
+    background:var(--green);
+    animation:pulse 2s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%   { box-shadow:0 0 0 0 rgba(0,186,124,.45); }
+    70%  { box-shadow:0 0 0 8px rgba(0,186,124,0); }
+    100% { box-shadow:0 0 0 0 rgba(0,186,124,0); }
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+  }
+  .chip{
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--accent);
+    background:rgba(29,155,240,.1);
+    border-radius:999px;
+    padding:5px 12px;
+  }
+
+  .visit{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    margin-top:14px;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--accent);
+  }
+  .visit svg{
+    width:16px;
+    height:16px;
+    transition:transform .2s ease;
+  }
+  .card:hover .visit svg{ transform:translateX(-3px); }
+
+  /* ===== Footer ===== */
+  .site-footer{
+    margin-top:auto;
+    text-align:center;
+    padding:20px 16px;
+    padding-bottom:calc(20px + env(safe-area-inset-bottom));
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:13px;
+  }
+
+  @media (min-width:640px){
+    .profile{ padding:24px 20px; }
+    .cards{ padding:12px 20px 24px; }
+    .section-head{ padding:20px 20px 4px; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    *,*::before,*::after{ animation:none !important; transition:none !important; }
+  }
 </style>
 </head>
 <body>
-<header>
-  <h1>الـ<span>بومرف</span></h1>
-  <p>منصة واحدة لكل تطبيقاتي ومنتجاتي — كل شيء في مكانه</p>
-</header>
-<main>
-  <div class="grid">
-    <a class="card" href="/stm/">
-      <div class="icon">📖</div>
-      <h2>STM — اقرأ ودرس</h2>
-      <p>قارئ ذكي + تكرار متباعد FSRS: حول أي مقالة إلى بطاقات دراسة وراجعها بجدولة علمية.</p>
-      <span class="path">/stm</span>
-    </a>
-    <a class="card" href="/code/">
-      <div class="icon">🧠</div>
-      <h2>Code — نظام الإتقان</h2>
-      <p>من الدروس إلى الذرات المعرفية: استخراج موثّق، مراجعة بشرية، ومراجعات متباعدة بتدريب متكيف. <strong style="color:#9ece6a;">لوحة حية بأرقام المشروع متاحة الآن.</strong></p>
-      <span class="path">/code</span>
-    </a>
+<div class="column">
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="topbar-row">
+      <a class="logo-mark" href="#" aria-label="البومرف — الصفحة الرئيسية">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M13 2 3 14h7l-1 8L21 10h-7l-1-8Z"/>
+        </svg>
+      </a>
+      <div class="brand">
+        <strong>البومرف</strong>
+        <span>منصة أعمالي</span>
+      </div>
+    </div>
+
+    <!-- Decorative tab strip -->
+    <nav class="tabs" aria-label="أقسام المنصة">
+      <a class="tab active" href="#" aria-current="page">الرئيسية</a>
+      <a class="tab" href="#apps">التطبيقات</a>
+    </nav>
+  </header>
+
+  <!-- Profile block -->
+  <section class="profile">
+    <div class="avatar" aria-hidden="true">ب</div>
+    <div class="name-row">
+      <h1>البومرف</h1>
+      <span class="verified" title="موثّق">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#1d9bf0"/>
+          <path d="m8 12.3 2.6 2.6L16 9.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+    <span class="handle">@albomrf</span>
+    <p class="bio">منصة واحدة لكل تطبيقاتي ومنتجاتي — كل شيء في مكانه.</p>
+    <div class="stats">
+      <span><strong>2</strong> تطبيقات</span>
+      <span>انضم في <strong>2026</strong></span>
+    </div>
+  </section>
+
+  <!-- Apps -->
+  <div class="section-head" id="apps">
+    <h2>التطبيقات</h2>
+    <p>كل ما بنيتُه يعمل على هذا السيرفر</p>
   </div>
-</main>
-<footer>صُنع بعناية — جميع التطبيقات تعمل على هذا السيرفر</footer>
+
+  <main class="cards">
+
+    <!-- STM -->
+    <a class="card" href="/stm/" aria-label="فتح تطبيق STM">
+      <div class="card-head">
+        <span class="app-icon stm" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 6.5C10.5 4.8 8.4 4 5.5 4H3v14h3c2.6 0 4.7.8 6 2 1.3-1.2 3.4-2 6-2h3V4h-2.5c-2.9 0-5 .8-6.5 2.5Z"/>
+            <path d="M12 6.5V20"/>
+          </svg>
+        </span>
+        <div class="card-id">
+          <strong>STM</strong>
+          <span class="sub">قارئ ذكي + تكرار متباعد FSRS</span>
+        </div>
+        <span class="badge">/stm</span>
+      </div>
+      <p class="desc">حوّل أي مقالة إلى بطاقات دراسة وراجعها بجدولة علمية قائمة على التكرار المتباعد.</p>
+      <div class="chips">
+        <span class="chip">قراءة ذكية</span>
+        <span class="chip">بطاقات دراسة</span>
+        <span class="chip">FSRS</span>
+      </div>
+      <span class="visit">
+        زيارة التطبيق
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </span>
+    </a>
+
+    <!-- Code -->
+    <a class="card" href="/code/" aria-label="فتح تطبيق Code">
+      <div class="card-head">
+        <span class="app-icon code" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m16 18 6-6-6-6"/>
+            <path d="m8 6-6 6 6 6"/>
+            <path d="m13.5 4-3 16"/>
+          </svg>
+        </span>
+        <div class="card-id">
+          <strong>Code</strong>
+          <span class="sub">نظام الإتقان</span>
+        </div>
+        <span class="badge">/code</span>
+      </div>
+      <p class="desc">من الدروس إلى الذرات المعرفية: استخراج موثّق، مراجعة بشرية، ومراجعات متباعدة بتدريب متكيف.</p>
+      <p class="live"><span class="dot" aria-hidden="true"></span> لوحة تحكم حية بأرقام المشروع متاحة الآن.</p>
+      <div class="chips">
+        <span class="chip">ذرات معرفية</span>
+        <span class="chip">مراجعة بشرية</span>
+        <span class="chip">لوحة حية</span>
+      </div>
+      <span class="visit">
+        زيارة التطبيق
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </span>
+    </a>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">© 2026 البومرف</footer>
+
+</div>
 </body>
 </html>
