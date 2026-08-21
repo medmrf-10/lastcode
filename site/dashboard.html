@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code — لوحة المشروع الحية</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"IBM Plex Sans Arabic",system-ui,sans-serif; background:#0b0e14; color:#e8eaed; min-height:100vh; }
+  main { width:min(880px,100%); margin:0 auto; padding:56px 20px 64px; }
+  h1 { font-size:clamp(26px,4vw,36px); font-weight:700; }
+  h1 span { color:#7aa2f7; }
+  .updated { color:#9aa0a6; font-size:13px; margin-top:8px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin-top:28px; }
+  .stat { background:#131720; border:1px solid #1f2633; border-radius:12px; padding:18px; }
+  .stat .v { font-size:30px; font-weight:700; color:#7aa2f7; }
+  .stat .l { color:#9aa0a6; font-size:13px; margin-top:4px; }
+  .card { background:#131720; border:1px solid #1f2633; border-radius:12px; padding:22px; margin-top:16px; }
+  .card h2 { font-size:17px; font-weight:600; direction:ltr; text-align:right; }
+  .card .sub { color:#9aa0a6; font-size:13px; margin-top:4px; }
+  .bar { height:10px; border-radius:999px; background:#1f2633; overflow:hidden; margin-top:14px; display:flex; }
+  .bar span { background:#7aa2f7; height:100%; }
+  .legend { display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; font-size:12.5px; color:#c9ced6; }
+  .dot::before { content:"●"; margin-left:6px; font-size:10px; vertical-align:middle; }
+  .dot.ok::before { color:#9ece6a; } .dot.star::before { color:#e0af68; } .dot.no::before { color:#f7768e; } .dot::before { color:#565f89; }
+  table { width:100%; border-collapse:collapse; margin-top:10px; font-size:14px; }
+  td { padding:8px 4px; border-bottom:1px solid #1f2633; }
+  tr:last-child td { border-bottom:none; }
+  td.num { text-align:left; font-weight:600; color:#7aa2f7; }
+  footer { text-align:center; color:#5f6368; font-size:13px; padding:18px; border-top:1px solid #1f2633; margin-top:40px; }
+  footer a { color:#7aa2f7; text-decoration:none; }
+</style>
+</head>
+<body>
+<main>
+  <h1>لوحة <span>Code</span> الحية</h1>
+  <p class="updated">أرقام حقيقية من قلب المشروع — آخر توليد: الجمعة، ٢١ أغسطس ٢٠٢٦ في ١:٢٦ م • commit e7c5267 — الجمعة، ٢١ أغسطس ٢٠٢٦ في ١:٠٦ م</p>
+
+  <div class="grid">
+    <div class="stat"><div class="v">٣١</div><div class="l">ذرة مستخرجة</div></div>
+    <div class="stat"><div class="v">٠</div><div class="l">في قاعدة المعرفة (لم تُنشأ بعد)</div></div>
+    <div class="stat"><div class="v">١٠</div><div class="l">درس منسوخ</div></div>
+    <div class="stat"><div class="v">٣٦</div><div class="l">خريطة كورس</div></div>
+  </div>
+
+  
+  <section class="card">
+    <h2>frontend-1-ch1-2</h2>
+    <p class="sub">أحدث اقتراح استخراج — ٣١ ذرة</p>
+    <div class="bar"><span style="width:23%"></span></div>
+    <div class="legend">
+      <span class="dot ok">معتمدة ٧</span>
+      <span class="dot star">أعرفها ٠</span>
+      <span class="dot no">مستبعدة ٢٤</span>
+      <span class="dot">بلا قرار ٠</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>توزيع الذرات بحسب نوعها</h2>
+    <table><tr><td>مفهوم</td><td class="num">١١</td></tr><tr><td>علاقة سببية</td><td class="num">٦</td></tr><tr><td>تمييز</td><td class="num">٥</td></tr><tr><td>حقيقة</td><td class="num">٤</td></tr><tr><td>قاعدة قرار</td><td class="num">٣</td></tr><tr><td>مهارة أداة</td><td class="num">١</td></tr><tr><td>قيد</td><td class="num">١</td></tr></table>
+  </section>
+
+  <section class="card">
+    <h2>أين نقف الآن؟</h2>
+    <table>
+      <tr><td>خط الاستخراج والتحقق (CLI)</td><td class="num">✓ يعمل</td></tr>
+      <tr><td>المراجعة البشرية بالحفظ اللحظي</td><td class="num">✓ تعمل</td></tr>
+      <tr><td>ربط FSRS + أوامر الدراسة والتمارين</td><td class="num">⬗ تحت البناء</td></tr>
+      <tr><td>نسخة الموبايل والمزامنة</td><td class="num">⬜ مؤجلة بقرار</td></tr>
+    </table>
+  </section>
+</main>
+<footer><a href="/code/">← عودة إلى صفحة Code</a></footer>
+</body>
+</html>
