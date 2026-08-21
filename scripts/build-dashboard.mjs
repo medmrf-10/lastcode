@@ -53,9 +53,7 @@ if (fs.existsSync(proposalsDir)) {
   }
 }
 
-const allAtoms = proposals.flatMap((p) => p.atoms).map((a) =>
-  Array.isArray(a) ? { kind: a[3] } : a,
-);
+const allAtoms = proposals.flatMap((p) => p.atoms);
 const kindLabels = {
   concept: 'مفهوم',
   distinction: 'تمييز',
