@@ -17,3 +17,7 @@ notes/ox.md
 notes/todo.md
 "notes/cmd2 1.md"
 .obsidian/
+__pycache__/
+*.pyc
+*.log
+*.jks
